@@ -12,10 +12,18 @@ and open the template in the editor.
     </head>
     <body>
         <div>Formulário de Cadastro de Usuário</div>
-        <form action="http://localhost/witor/php/index.php" method="post">
-            Nome: <input type="text" name="nome" value="Eduardo"/>
-            Idade: <input type="text" name="idade" value="18"/>
-            <input type="submit" value="Enviar"/>
+        <form action="http://localhost/witor/php/ativ3.php" method="post">
+            Valor1: <input type="text" name="valor1" value=""/>
+            Valor2: <input type="text" name="valor2" value=""/>
+            <p>somar: <input type ="radio" name ="operacao" value = "soma"/><p/>
+            <p>subtrair: <input type ="radio" name ="operacao" value = "subtrair"/></p>
+            <p>multiplicar: <input type ="radio" name ="operacao" value = "multiplicar"/></p>
+            <p>dividir: <input type ="radio" name ="operacao" value = "dividir"/></p>
+            <p>resto: <input type ="radio" name ="operacao" value = "resto"/></p>
+            <p>media: <input type ="radio" name ="operacao" value = "media"/></p>
+            <input type ="submit" value ="Enviar"/>
+           
+                          
         </form>
     </body>
 </html>
