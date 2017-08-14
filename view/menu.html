@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Crud do Cliente</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+table, th, td {
+    border: 1px solid black;
+}
+    </style>
+    </head>
+    <body>
+        <form action = "http://localhost/witor/persistencia/projeto.php" method ="post">
+            <table border = 1 align = "center">
+            <h2>Cadastrar novo Cliente:</h2>
+           
+            Inserir ID:<br><input type ="text" name = "idCliente" /> <br/>
+            Inserir Nome:<br><input type ="text" name = "nomeCliente" /><br/>
+            Inserir Rua:<br><input type ="text" name = "ruaCliente" /><br/>
+            Inserir Cidade:<br><input type ="text" name = "cidadeCliente" /><br/>
+            <br><input type ="submit" value = "Cadastrar"/><br/>
+            
+        
+            
+            <br>Excluir Cliente: Para excluir inserir o id.</br>
+            <br><input type ="text" name="excCliente"/> 
+            <input type ="radio" name ="operador" value ="excluir"/> Confirmar exclusão </br>
+            <input type ="submit" value ="Excluir"/>
+               
+        
+            <br>
+                Buscar cliente: Para buscar, digitar nome ou id.
+            </br>
+            <br><input type = "text" name = "buscarCliente"/>
+            <input type ="radio" name ="operador" value="buscar"/> Confirmar busca </br>
+            <input type ="submit" value ="Buscar"/>
+        </form>
+
+            
+               
+                <!--<tr>
+                <th>id</th>
+                <th>Nome</th>
+                <th>Rua</th>
+                <th>Cidade</th>
+                </tr>
+                
+                <?php>
+                
+                ?>
+              -->
+                
+            </table>    
+       
+
+       
+        
+     
+    </body>
+</html>
