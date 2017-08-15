@@ -21,30 +21,66 @@
 
     $atributes = "host=localhost port=5432 dbname=witor user=postgres password=123456";
     $conecta = pg_connect($atributes) or die("Falha na conexão!");
-  
-//Cadastrar clientes 
-//$sqlCadastrar = "insert into cliente (id, nome, rua, cidade) values ('$idCli', '$nomeCli', '$ruaCli', '$cidadeCli')";
-//
-//$result = pg_query($conecta,  $sqlCadastrar);
-//if(pg_affected_rows($result)>0){
-//    echo("Cliente cadastrado com sucesso!");    
-//}
-//Exibir lista de clientes
-if($operador == 'buscar')
-    {
-$sqlExibir = "select nome, rua, cidade from Cliente where (nome like '$nomeCli')";
-$tabela = pg_query($conecta,  $sqlExibir);
-while($linha = pg_fetch_array($tabela))
-        echo"<tr><td>".$linha['id']."<tr><td>".$linha['nome'].
-        "<tr><td>".$linha['rua']."<tr><td>".$linha['cidade'];
-}
     
-//Atualizar Cliente
-//$updateCliente = ("update cliente set id = '$idCli', nome = '$nomeCli', rua = '$ruaCli', cidade = '$cidadeCli'"); 
-//$atualizarCliente = pg_query($conecta, $updateCliente);
-////Excluir Cliente
-//$excluirCliente = ("delete from cliente where id = '$idCli'");
-//$excluir = pg_query($conecta, $excluirCliente);
+  //echo "Nome cliente: $nomeCli";  die("");
+//Cadastrar clientes 
+    
+    if($operador == 'cadastro'){
+    $sqlCadastrar = "insert into cliente (id, nome, rua, cidade) values ('$idCli', '$nomeCli', '$ruaCli', '$cidadeCli')";
+    $result = pg_query($conecta,  $sqlCadastrar);
+        if(pg_affected_rows($result)>0)
+            {
+        echo("Cliente cadastrado com sucesso!");    
+            }
+    }
+    
+//Exibir lista de clientes
+    elseif($operador == 'buscar')
+    {
+        $sqlExibir = "select * from Cliente where nome = '$nomeCli'";
+        echo $sqlExibir;
+        $tabela = pg_query($conecta,  $sqlExibir);
+            while($linha = pg_fetch_array($tabela)){
+            echo"<tr><td>"."id: ".$linha['id'].
+                "<tr><td>"."nome: ".$linha['nome'].
+                "<tr><td>"."rua: ".$linha['rua'].
+                "<tr><td>"."cidade: ".$linha['cidade'];            
+            }
+    }
+
+//Atualizar Cliente por ID
+    elseif($operador == 'updateId'){
+        $updateCliente = ("update cliente set nome = '$nomeCli', rua = '$ruaCli', cidade = '$cidadeCli' WHERE id = '$idCli'"); 
+        $atualizarCliente = pg_query($conecta, $updateCliente);
+            if(!$atualizarCliente){
+              echo("Ocorreu algum erro.");
+        }   else{ 
+            echo("Cliente atualizado com sucesso!");  
+        }
+    }
+//Atualizar Cliente por nome
+    elseif($operador == 'updateNome'){
+        $updateCliente = ("update cliente set nome = '$nomeCli', rua = '$ruaCli', cidade = '$cidadeCli' WHERE nome = '$nomeCli'"); 
+        $atualizarCliente = pg_query($conecta, $updateCliente);
+            if(!$atualizarCliente){
+              echo("Ocorreu algum erro.");
+        }   else{ 
+            echo("Cliente atualizado com sucesso!");  
+        }
+    }
+////Excluir Cliente por ID
+    elseif($operador == 'excluir'){
+       $excluirCliente = ("delete from cliente where id = '$idCli'");
+       $excluir = pg_query($conecta, $excluirCliente);
+            if(!$excluir)
+            {
+            echo("Ocorreu um erro");
+            } else{
+              echo ("Cliente deletado com sucesso");
+                    
+                  }
+    
+}
 pg_close();
  
 ?>

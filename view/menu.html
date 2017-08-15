@@ -16,33 +16,70 @@ table, th, td {
     </style>
     </head>
     <body>
-        <form action = "http://localhost/witor/persistencia/projeto.php" method ="post">
-            <table border = 1 align = "center">
-            <h2>Cadastrar novo Cliente:</h2>
+        
+        <form id="formCadastro" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
+
+            <h3>Cadastrar novo Cliente:</h3>
            
             Inserir ID:<br><input type ="text" name = "idCliente" /> <br/>
             Inserir Nome:<br><input type ="text" name = "nomeCliente" /><br/>
             Inserir Rua:<br><input type ="text" name = "ruaCliente" /><br/>
-            Inserir Cidade:<br><input type ="text" name = "cidadeCliente" /><br/>
-            <br><input type ="submit" value = "Cadastrar"/><br/>
+            Inserir Cidade:<br><input type ="text" name = "cidadeCliente" />
+            <input type ="radio" name ="operador" value ="cadastro"/> Confirmar cadastro<br/>   
+          
+            <br><input type ="submit" value = "Cadastrar"/> <input type="reset" value = "resetar"/><br/>
             
+        </form>
         
+        <form id="formExcluir" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
+            <h3>Excluir Cliente:</h3>
             
             <br>Excluir Cliente: Para excluir inserir o id.</br>
-            <br><input type ="text" name="excCliente"/> 
+            <br><input type ="text" name="idCliente"/> 
             <input type ="radio" name ="operador" value ="excluir"/> Confirmar exclusão </br>
             <input type ="submit" value ="Excluir"/>
+            <br></br>
                
         
             <br>
+        </form>
+        
+        <form id="formBuscar" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
+            <h3>Buscar Cliente:</h3>
                 Buscar cliente: Para buscar, digitar nome ou id.
             </br>
-            <br><input type = "text" name = "buscarCliente"/>
+            <br><input type = "text" name = "nomeCliente"/>
             <input type ="radio" name ="operador" value="buscar"/> Confirmar busca </br>
-            <input type ="submit" value ="Buscar"/>
+            <input type ="submit" value ="Requisitar"/><br><br>
+        </form>
+        
+        <form id="formAtualizarId" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
+            <h3>Atualizar cliente por ID:</h3>
+            <br>
+                Atualizar cliente por ID: Para atualizar, digitar os campos.
+            </br>
+            Inserir ID:<br><input type ="text" name = "idCliente" /> <br/>
+            Inserir Nome:<br><input type ="text" name = "nomeCliente" /><br/>
+            Inserir Rua:<br><input type ="text" name = "ruaCliente" /><br/>
+            Inserir Cidade:<br><input type ="text" name = "cidadeCliente" />
+            <input type ="radio" name ="operador" value ="updateId"/> Confirmar update<br/>    
+            <br><input type ="submit" value = "Atualizar"/><br/>
+        </form>
+        
+         <form id="formAtualizarNome" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
+            <h3>Atualizar cliente por Nome:</h3>
+            <br>
+                Atualizar cliente por ID: Para atualizar, digitar os campos.
+            </br>
+            Inserir ID:<br><input type ="text" name = "idCliente" /> <br/>
+            Inserir Nome:<br><input type ="text" name = "nomeCliente" /><br/>
+            Inserir Rua:<br><input type ="text" name = "ruaCliente" /><br/>
+            Inserir Cidade:<br><input type ="text" name = "cidadeCliente" />
+            <input type ="radio" name ="operador" value ="updateNome"/> Confirmar update<br/>    
+            <br><input type ="submit" value = "Atualizar"/><br/>       
         </form>
 
-            
+            <table border = 1 align = "center">
                
                 <!--<tr>
                 <th>id</th>
@@ -55,11 +92,11 @@ table, th, td {
                 
                 ?>
               -->
-                
+               
             </table>    
        
 
-       
+     
         
      
     </body>
