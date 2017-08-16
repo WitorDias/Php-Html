@@ -10,91 +10,19 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-table, th, td {
-    border: 1px solid black;
-}
-    </style>
+            #divCenter {
+                text-align: center;
+            }
+        </style>
     </head>
-    <body>
+    <body bgcolor="#E6E6FA">
+      
         
-        <form id="formCadastro" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
-
-            <h3>Cadastrar novo Cliente:</h3>
-           
-            Inserir ID:<br><input type ="text" name = "idCliente" /> <br/>
-            Inserir Nome:<br><input type ="text" name = "nomeCliente" /><br/>
-            Inserir Rua:<br><input type ="text" name = "ruaCliente" /><br/>
-            Inserir Cidade:<br><input type ="text" name = "cidadeCliente" />
-            <input type ="radio" name ="operador" value ="cadastro"/> Confirmar cadastro<br/>   
-          
-            <br><input type ="submit" value = "Cadastrar"/> <input type="reset" value = "resetar"/><br/>
-            
-        </form>
-        
-        <form id="formExcluir" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
-            <h3>Excluir Cliente:</h3>
-            
-            <br>Excluir Cliente: Para excluir inserir o id.</br>
-            <br><input type ="text" name="idCliente"/> 
-            <input type ="radio" name ="operador" value ="excluir"/> Confirmar exclusão </br>
-            <input type ="submit" value ="Excluir"/>
-            <br></br>
-               
-        
-            <br>
-        </form>
-        
-        <form id="formBuscar" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
-            <h3>Buscar Cliente:</h3>
-                Buscar cliente: Para buscar, digitar nome ou id.
-            </br>
-            <br><input type = "text" name = "nomeCliente"/>
-            <input type ="radio" name ="operador" value="buscar"/> Confirmar busca </br>
-            <input type ="submit" value ="Requisitar"/><br><br>
-        </form>
-        
-        <form id="formAtualizarId" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
-            <h3>Atualizar cliente por ID:</h3>
-            <br>
-                Atualizar cliente por ID: Para atualizar, digitar os campos.
-            </br>
-            Inserir ID:<br><input type ="text" name = "idCliente" /> <br/>
-            Inserir Nome:<br><input type ="text" name = "nomeCliente" /><br/>
-            Inserir Rua:<br><input type ="text" name = "ruaCliente" /><br/>
-            Inserir Cidade:<br><input type ="text" name = "cidadeCliente" />
-            <input type ="radio" name ="operador" value ="updateId"/> Confirmar update<br/>    
-            <br><input type ="submit" value = "Atualizar"/><br/>
-        </form>
-        
-         <form id="formAtualizarNome" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
-            <h3>Atualizar cliente por Nome:</h3>
-            <br>
-                Atualizar cliente por ID: Para atualizar, digitar os campos.
-            </br>
-            Inserir ID:<br><input type ="text" name = "idCliente" /> <br/>
-            Inserir Nome:<br><input type ="text" name = "nomeCliente" /><br/>
-            Inserir Rua:<br><input type ="text" name = "ruaCliente" /><br/>
-            Inserir Cidade:<br><input type ="text" name = "cidadeCliente" />
-            <input type ="radio" name ="operador" value ="updateNome"/> Confirmar update<br/>    
-            <br><input type ="submit" value = "Atualizar"/><br/>       
-        </form>
-
-            <table border = 1 align = "center">
-               
-                <!--<tr>
-                <th>id</th>
-                <th>Nome</th>
-                <th>Rua</th>
-                <th>Cidade</th>
-                </tr>
-                
-                <?php>
-                
-                ?>
-              -->
-               
-            </table>    
-       
+    <center><a href="cadastrarCliente.html" target="_blank">Cadastrar novo cliente</a></center>
+    <center><a href="buscarCliente.html" target="_blank">Buscar cliente</a></center>
+    <center><a href="atualizarClienteId.html" target="_blank">Atualizar cliente por ID</a></center>
+    <center><a href="atualizarClienteNome.html" target="_blank">Atualizar Cliente por Nome</a></center>
+    <center><a href="deletarCliente.html" target="_blank">Deletar Cliente</a></center>
 
      
         

@@ -10,8 +10,8 @@
 //rua varchar(255) not null,
 //cidade varchar(255) not null)";
 
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+    /*error_reporting(E_ALL);
+    ini_set('display_errors', 1);*/
     
     $idCli = $_POST['idCliente'];
     $nomeCli = $_POST['nomeCliente'];
@@ -22,7 +22,7 @@
     $atributes = "host=localhost port=5432 dbname=witor user=postgres password=123456";
     $conecta = pg_connect($atributes) or die("Falha na conexão!");
     
-  //echo "Nome cliente: $nomeCli";  die("");
+
 //Cadastrar clientes 
     
     if($operador == 'cadastro'){
@@ -37,16 +37,20 @@
 //Exibir lista de clientes
     elseif($operador == 'buscar')
     {
-        $sqlExibir = "select * from Cliente where nome = '$nomeCli'";
-        echo $sqlExibir;
+        $sqlExibir = "select * from Cliente where nome ilike '%$nomeCli%'";
         $tabela = pg_query($conecta,  $sqlExibir);
+        if($tabela){
             while($linha = pg_fetch_array($tabela)){
             echo"<tr><td>"."id: ".$linha['id'].
                 "<tr><td>"."nome: ".$linha['nome'].
                 "<tr><td>"."rua: ".$linha['rua'].
                 "<tr><td>"."cidade: ".$linha['cidade'];            
-            }
+            } 
+        } Else{
+            echo("Usuario não encontrado");
+              }
     }
+    
 
 //Atualizar Cliente por ID
     elseif($operador == 'updateId'){
@@ -85,7 +89,7 @@ pg_close();
  
 ?>
     </table>
-    <a href="../view/menu.html">Voltar para o menu</a>
+<center><a href="../view/menu.html">Voltar para o menu</a></center>
 </body>
 </head>    
 </html>    

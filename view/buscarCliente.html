@@ -9,8 +9,22 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           <style>
+            #divCenter {
+                text-align: center;
+            }
+        </style>
     </head>
-    <body>
-        <div>TODO write content</div>
+    <body bgcolor="#E6E6FA">
+         <div id="divCenter">
+             <form id="formBuscar" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
+            <h3>Buscar Cliente:</h3>
+                Buscar cliente: Para buscar, digitar nome ou id.
+            </br>
+            <br><input type = "text" name = "nomeCliente"/>
+            <input type ="radio" name ="operador" value="buscar"/> Confirmar busca </br> <br></br> 
+            <input type ="submit" value ="Requisitar"/><br><br>
+        </form>
+         </div>
     </body>
 </html>
