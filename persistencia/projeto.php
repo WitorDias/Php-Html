@@ -18,6 +18,10 @@
     $ruaCli = $_POST['ruaCliente'];
     $cidadeCli = $_POST['cidadeCliente'];
     $operador = $_POST['operador'];
+    $idConta = $_POST['idConta'];
+    $cidadeConta = $_POST['cidade'];
+    $saldo = $_POST['saldo'];
+    $agencia = $_POST['agencia'];
 
     $atributes = "host=localhost port=5432 dbname=witor user=postgres password=123456";
     $conecta = pg_connect($atributes) or die("Falha na conexão!");
@@ -41,10 +45,10 @@
         $tabela = pg_query($conecta,  $sqlExibir);
         if($tabela){
             while($linha = pg_fetch_array($tabela)){
-            echo"<tr><td>"."id: ".$linha['id'].
-                "<tr><td>"."nome: ".$linha['nome'].
-                "<tr><td>"."rua: ".$linha['rua'].
-                "<tr><td>"."cidade: ".$linha['cidade'];            
+            echo"<tr><td>"."id: ".$linha['id']."</td></tr>".
+                "<tr><td><a href='../view/menu.html'>nome: ".$linha['nome']."</a></td></tr>".
+                "<tr><td>"."rua: ".$linha['rua']."</td></tr>".
+                "<tr><td>"."cidade: ".$linha['cidade']."</td></tr>";            
             } 
         } Else{
             echo("Usuario não encontrado");
@@ -64,7 +68,7 @@
     }
 //Atualizar Cliente por nome
     elseif($operador == 'updateNome'){
-        $updateCliente = ("update cliente set nome = '$nomeCli', rua = '$ruaCli', cidade = '$cidadeCli' WHERE nome = '$nomeCli'"); 
+        $updateCliente = ("update cliente set nome = '$nomeCli', rua = '$ruaCli', cidade = '$cidadeCli' WHERE nome ilike '$nomeCli'"); 
         $atualizarCliente = pg_query($conecta, $updateCliente);
             if(!$atualizarCliente){
               echo("Ocorreu algum erro.");
@@ -85,6 +89,72 @@
                   }
     
 }
+////Cadastrar conta
+   elseif($operador == 'cadastrarConta'){
+    $sqlCadastrarConta = "insert into Contas (idconta, cidade, saldo, agencia) values ('$idConta', '$cidadeConta', '$saldo', '$agencia')";
+    if($saldo > 0){
+    $result = pg_query($conecta,  $sqlCadastrarConta);
+    if($sqlCadastrarConta)
+            {
+        echo("Conta cadastrada com sucesso!");    
+            }
+            else{
+                echo("ocorreu algum erro");
+            }
+    }
+     Else{
+        echo("Digite um valor não negativo");
+    }
+       
+    }
+    //Exibir lista de contas
+    elseif($operador == 'buscarConta')
+    {
+        
+        
+        $sqlExibir = "select * from Contas";
+        
+        if($idConta != ''){
+            $sqlExibir .= " where idconta = '$idConta'";
+        }
+        
+        $tabela = pg_query($conecta,  $sqlExibir);
+        if($tabela){
+            while($linha = pg_fetch_array($tabela)){
+            echo"<tr><td>"."id: ".$linha['idconta'].
+                "<tr><td>"."cidade: ".$linha['cidade'].
+                "<tr><td>"."saldo: R$ ".$linha['saldo'].
+                "<tr><td>"."agencia: ".$linha['agencia'];            
+            } 
+        } Else{
+            echo("Conta não encontrada");
+              }
+    }
+    
+    //Buscar todas as contas
+        elseif($operador == 'buscarAllConta')
+    {
+            
+        $sqlExibir = "select * from Contas";
+        $tabela = pg_query($conecta,  $sqlExibir);
+      if($tabela){
+            while($linha = pg_fetch_array($tabela)){
+            echo"<tr><td>"."id: ".$linha['idconta'].
+                "<tr><td>"."cidade: ".$linha['cidade'].
+                "<tr><td>"."saldo: R$ ".$linha['saldo'].
+                "<tr><td>"."agencia: ".$linha['agencia'];            
+            } 
+        } Else{
+            echo("Conta não encontrada");
+              }
+        
+    }
+    
+else{
+    echo("Por favor, confirmar a operação.");
+    
+}
+
 pg_close();
  
 ?>
