@@ -22,6 +22,7 @@
     $cidadeConta = $_POST['cidade'];
     $saldo = $_POST['saldo'];
     $agencia = $_POST['agencia'];
+    $chaveEs = $_POST['id_cliente'];
 
     $atributes = "host=localhost port=5432 dbname=witor user=postgres password=123456";
     $conecta = pg_connect($atributes) or die("Falha na conexão!");
@@ -41,7 +42,11 @@
 //Exibir lista de clientes
     elseif($operador == 'buscar')
     {
-        $sqlExibir = "select * from Cliente where nome ilike '%$nomeCli%'";
+        $sqlExibir = "select * from Cliente";
+        
+        if($nomeCli != ''){
+            $sqlExibir .= " where nome = '$nomeCli'";
+        }
         $tabela = pg_query($conecta,  $sqlExibir);
         if($tabela){
             while($linha = pg_fetch_array($tabela)){
@@ -91,21 +96,31 @@
 }
 ////Cadastrar conta
    elseif($operador == 'cadastrarConta'){
-    $sqlCadastrarConta = "insert into Contas (idconta, cidade, saldo, agencia) values ('$idConta', '$cidadeConta', '$saldo', '$agencia')";
-    if($saldo > 0){
+    $sqlCadastrarConta = "insert into Contas (idconta, cidadeconta, saldo, agencia, cod_cliente) values ('$idConta', '$cidadeConta', '$saldo', '$agencia', '$chaveEs')";
+    $sqlvalidador = "select * from Cliente"; // select para varrer o banco
+    $tabela = pg_query($conecta,  $sqlvalidador); // conexão para o validador na table clientes
+    while($linha = pg_fetch_array($tabela)){ //Valida toda a matriz do banco e captura o ID na var AUX;
+    $aux = $linha['id'];
+    
+    if($saldo > 0){                          //if dentro do while para cada id ser capturado.
+        if($chaveEs == $aux){
     $result = pg_query($conecta,  $sqlCadastrarConta);
-    if($sqlCadastrarConta)
+    
+            if($sqlCadastrarConta)
             {
-        echo("Conta cadastrada com sucesso!");    
+                echo("Conta cadastrada com sucesso!");    
             }
             else{
                 echo("ocorreu algum erro");
             }
+        }
+        
     }
      Else{
         echo("Digite um valor não negativo");
     }
-       
+    
+    }    
     }
     //Exibir lista de contas
     elseif($operador == 'buscarConta')
@@ -124,7 +139,8 @@
             echo"<tr><td>"."id: ".$linha['idconta'].
                 "<tr><td>"."cidade: ".$linha['cidade'].
                 "<tr><td>"."saldo: R$ ".$linha['saldo'].
-                "<tr><td>"."agencia: ".$linha['agencia'];            
+                "<tr><td>"."agencia: ".$linha['agencia'].
+                "<tr><td>"."codCliente: ".$linha['cod_cliente'];
             } 
         } Else{
             echo("Conta não encontrada");
@@ -142,7 +158,8 @@
             echo"<tr><td>"."id: ".$linha['idconta'].
                 "<tr><td>"."cidade: ".$linha['cidade'].
                 "<tr><td>"."saldo: R$ ".$linha['saldo'].
-                "<tr><td>"."agencia: ".$linha['agencia'];            
+                "<tr><td>"."agencia: ".$linha['agencia'].
+                "<tr><td>"."codCliente: ".$linha['cod_cliente'];            
             } 
         } Else{
             echo("Conta não encontrada");
