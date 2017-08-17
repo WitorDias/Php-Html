@@ -23,6 +23,7 @@
     $saldo = $_POST['saldo'];
     $agencia = $_POST['agencia'];
     $chaveEs = $_POST['id_cliente'];
+    $id_agencia = $_POST['id_agencia'];
 
     $atributes = "host=localhost port=5432 dbname=witor user=postgres password=123456";
     $conecta = pg_connect($atributes) or die("Falha na conexão!");
@@ -96,32 +97,23 @@
 }
 ////Cadastrar conta
    elseif($operador == 'cadastrarConta'){
-    $sqlCadastrarConta = "insert into Contas (idconta, cidadeconta, saldo, agencia, cod_cliente) values ('$idConta', '$cidadeConta', '$saldo', '$agencia', '$chaveEs')";
-    $sqlvalidador = "select * from Cliente"; // select para varrer o banco
-    $tabela = pg_query($conecta,  $sqlvalidador); // conexão para o validador na table clientes
-    while($linha = pg_fetch_array($tabela)){ //Valida toda a matriz do banco e captura o ID na var AUX;
-    $aux = $linha['id'];
-    
-    if($saldo > 0){                          //if dentro do while para cada id ser capturado.
-        if($chaveEs == $aux){
+    $sqlCadastrarConta = "insert into Contas (idconta, cidadeconta, saldo, cod_cliente, agencia ) values "
+            . "('$idConta', '$cidadeConta', '$saldo', '$chaveEs', '$id_agencia')";
+        if($saldo > 0){                          
     $result = pg_query($conecta,  $sqlCadastrarConta);
-    
-            if($sqlCadastrarConta)
+            
+        
+            if($result)
             {
                 echo("Conta cadastrada com sucesso!");    
             }
             else{
-                echo("ocorreu algum erro");
+                echo("Erro: saldo inserido negativo ou codigo do cliente inexistente");
             }
-        }
-        
-    }
-     Else{
-        echo("Digite um valor não negativo");
-    }
-    
+            }
+
     }    
-    }
+    
     //Exibir lista de contas
     elseif($operador == 'buscarConta')
     {
