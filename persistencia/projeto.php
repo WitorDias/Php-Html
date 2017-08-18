@@ -24,6 +24,8 @@
     $agencia = $_POST['agencia'];
     $chaveEs = $_POST['id_cliente'];
     $id_agencia = $_POST['id_agencia'];
+    $capturaCliente = $_POST['buscaCliente'];
+    $capturaConta = $_POST['buscaConta'];
 
     $atributes = "host=localhost port=5432 dbname=witor user=postgres password=123456";
     $conecta = pg_connect($atributes) or die("Falha na conexão!");
@@ -36,7 +38,8 @@
     $result = pg_query($conecta,  $sqlCadastrar);
         if(pg_affected_rows($result)>0)
             {
-        echo("Cliente cadastrado com sucesso!");    
+        echo("Cliente cadastrado com sucesso!");
+        echo("<a href='associarCliente.php' target='_blank'>Assosciar cliente a conta</a>");
             }
     }
     
@@ -97,8 +100,8 @@
 }
 ////Cadastrar conta
    elseif($operador == 'cadastrarConta'){
-    $sqlCadastrarConta = "insert into Contas (idconta, cidadeconta, saldo, cod_cliente, agencia ) values "
-            . "('$idConta', '$cidadeConta', '$saldo', '$chaveEs', '$id_agencia')";
+    $sqlCadastrarConta = "insert into Contas (idconta, cidadeconta, saldo, agencia ) values "
+            . "('$idConta', '$cidadeConta', '$saldo', '$id_agencia')";
         if($saldo > 0){                          
     $result = pg_query($conecta,  $sqlCadastrarConta);
             
@@ -158,6 +161,21 @@
               }
         
     }
+  //Associar Clientes
+  elseif($operador == 'associar'){
+      $associarC = ("update contas set cod_cliente = '$capturaCliente' where id conta = '$capturaConta'");
+      $associar = pg_query($conecta, $associarC);
+      if($associar){
+          echo("Cliente associado com sucesso!");
+      }
+        else{
+            echo("Falha na associação.");
+        }
+  }
+      
+    
+    
+    
     
 else{
     echo("Por favor, confirmar a operação.");
