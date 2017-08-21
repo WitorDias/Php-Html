@@ -26,7 +26,7 @@
         while($linha = pg_fetch_array($tabela)){
             $aux = $linha['id'];
             $aux2 = $linha['nome'];
-            echo "<option value=\"$aux\">$aux2</option>";
+            echo "<option value=\"$aux\">ID: $aux Nome: $aux2</option>";
         }
     pg_close();
 ?>

@@ -24,10 +24,12 @@ and open the template in the editor.
             Inserir ID:<br><input type ="text" name = "idConta" /> <br/>
             Inserir Cidade:<br><input type ="text" name = "cidade" /><br/>
             Inserir Saldo:<br><input type ="text" name = "saldo" /></br>
-            
+        <!--    
             Selecionar Cliente:<br>
         <select name="buscaCliente">
+           
 <?php
+ /*
     $atributes = "host=localhost port=5432 dbname=witor user=postgres password=123456";
     $conecta = pg_connect($atributes) or die("Falha na conexão!");            
     $sqlBuscaCliente = "select id, nome from cliente"; 
@@ -39,10 +41,14 @@ and open the template in the editor.
             echo "<option value=\"$aux\">$aux2</option>";
         }
     pg_close();
+  * 
+  */
 ?>
+      
             
         </select>
         </br>
+        -->
             
             <select name="id_agencia">
 <?php

@@ -39,23 +39,22 @@
         if(pg_affected_rows($result)>0)
             {
         echo("Cliente cadastrado com sucesso!");
-        echo("<a href='associarCliente.php' target='_blank'>Assosciar cliente a conta</a>");
             }
     }
     
-//Exibir lista de clientes
-    elseif($operador == 'buscar')
+//Exibir lista de clientes por nome
+    elseif($operador == 'buscarNome')
     {
         $sqlExibir = "select * from Cliente";
         
-        if($nomeCli != ''){
-            $sqlExibir .= " where nome = '$nomeCli'";
+        if($capturaCliente != ''){
+            $sqlExibir .= " where id = '$capturaCliente'";
         }
         $tabela = pg_query($conecta,  $sqlExibir);
         if($tabela){
             while($linha = pg_fetch_array($tabela)){
             echo"<tr><td>"."id: ".$linha['id']."</td></tr>".
-                "<tr><td><a href='../view/menu.html'>nome: ".$linha['nome']."</a></td></tr>".
+                "<tr><td><a href='../view/editarCliente.php?id=".$linha['id']."'>nome: ".$linha['nome']."</a></td></tr>".
                 "<tr><td>"."rua: ".$linha['rua']."</td></tr>".
                 "<tr><td>"."cidade: ".$linha['cidade']."</td></tr>";            
             } 
@@ -65,18 +64,28 @@
     }
     
 
-//Atualizar Cliente por ID
-    elseif($operador == 'updateId'){
-        $updateCliente = ("update cliente set nome = '$nomeCli', rua = '$ruaCli', cidade = '$cidadeCli' WHERE id = '$idCli'"); 
-        $atualizarCliente = pg_query($conecta, $updateCliente);
-            if(!$atualizarCliente){
-              echo("Ocorreu algum erro.");
-        }   else{ 
-            echo("Cliente atualizado com sucesso!");  
+//Buscar Cliente por ID
+    elseif($operador == 'buscarId')
+    {
+        $sqlExibir = "select * from Cliente";
+        
+        if($idCli != ''){
+            $sqlExibir .= " where id = '$idCli'";
         }
+        $tabela = pg_query($conecta,  $sqlExibir);
+        if($tabela){
+            while($linha = pg_fetch_array($tabela)){
+            echo"<tr><td>"."id: ".$linha['id']."</td></tr>".
+                "<tr><td><a href='../view/editarCliente.php?id=".$linha['id']."'>nome: ".$linha['nome']."</a></td></tr>".
+                "<tr><td>"."rua: ".$linha['rua']."</td></tr>".
+                "<tr><td>"."cidade: ".$linha['cidade']."</td></tr>";            
+            } 
+        } Else{
+            echo("Usuario não encontrado");
+              }
     }
 //Atualizar Cliente por nome
-    elseif($operador == 'updateNome'){
+    elseif($operador == 'updateNome' or $operador == 'editarCliente'){
         $updateCliente = ("update cliente set nome = '$nomeCli', rua = '$ruaCli', cidade = '$cidadeCli' WHERE nome ilike '$nomeCli'"); 
         $atualizarCliente = pg_query($conecta, $updateCliente);
             if(!$atualizarCliente){
@@ -108,7 +117,8 @@
         
             if($result)
             {
-                echo("Conta cadastrada com sucesso!");    
+                echo("Conta cadastrada com sucesso!");
+                echo("<a href='associarCliente.php' target='_blank'>Assosciar cliente a conta</a>");
             }
             else{
                 echo("Erro: saldo inserido negativo ou codigo do cliente inexistente");
@@ -132,10 +142,9 @@
         if($tabela){
             while($linha = pg_fetch_array($tabela)){
             echo"<tr><td>"."id: ".$linha['idconta'].
-                "<tr><td>"."cidade: ".$linha['cidade'].
                 "<tr><td>"."saldo: R$ ".$linha['saldo'].
                 "<tr><td>"."agencia: ".$linha['agencia'].
-                "<tr><td>"."codCliente: ".$linha['cod_cliente'];
+                "<tr><td><a href='../view/editarCliente.php?id=".$linha['cod_cliente']."'>Id do cliente associado: ".$linha['cod_cliente']."</a></td></tr>";
             } 
         } Else{
             echo("Conta não encontrada");
@@ -163,7 +172,7 @@
     }
   //Associar Clientes
   elseif($operador == 'associar'){
-      $associarC = ("update contas set cod_cliente = '$capturaCliente' where id conta = '$capturaConta'");
+      $associarC = ("update contas set cod_cliente = '$capturaCliente' where idconta = '$capturaConta'");
       $associar = pg_query($conecta, $associarC);
       if($associar){
           echo("Cliente associado com sucesso!");
