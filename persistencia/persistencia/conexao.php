@@ -17,6 +17,7 @@
     echo $sql;
     
     $result = pg_query($conecta,  $sql);
+    echo 'testando include';
     pg_close();
 
 //echo "teste";

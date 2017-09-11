@@ -9,8 +9,14 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           <style>
+            #divCenter {
+                text-align: center;
+            }
+        </style>
     </head>
-    <body>
+    <body bgcolor="#E6E6FA">
+         <div id="divCenter">
         <form id="formAtualizarNome" action = "http://localhost/witor/persistencia/projeto.php" method ="post">
             <h3>Atualizar cliente por Nome:</h3>
             <br>
@@ -20,8 +26,10 @@ and open the template in the editor.
             Inserir Nome:<br><input type ="text" name = "nomeCliente" /><br/>
             Inserir Rua:<br><input type ="text" name = "ruaCliente" /><br/>
             Inserir Cidade:<br><input type ="text" name = "cidadeCliente" />
-            <input type ="radio" name ="operador" value ="updateNome"/> Confirmar update<br/>    
+            <input type ="radio" name ="operador" value ="updateNome"/> Confirmar update<br/>    <br></br> 
             <br><input type ="submit" value = "Atualizar"/><br/>       
+         
         </form>
+        </div>
     </body>
 </html>
